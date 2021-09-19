@@ -1,0 +1,7 @@
+name: PowerUps
+main: com.strixmc.powerups.PowerUps
+version: 1.0.0
+softdepend:
+  - PlaceholderAPI
+authors:
+  - Sainted
