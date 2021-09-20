@@ -9,11 +9,24 @@ repositories {
     mavenCentral()
     mavenLocal()
 
+    maven { url 'https://repo.codemc.io/repository/maven-public/' }
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    compileOnly 'me.clip:placeholderapi:2.10.10'
+    compileOnly 'javax.inject:javax.inject:1'
+    compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.0'
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+compileJava {
+    options.encoding 'UFT-8'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }

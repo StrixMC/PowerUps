@@ -1,7 +1,29 @@
-name: PowerUps
 main: com.strixmc.powerups.PowerUps
+name: PowerUps
 version: 1.0.0
+website: https://docs.strixmc.com/plugins/powerups
+api-version: 1.13
+
 softdepend:
+  - HolographicDisplays
   - PlaceholderAPI
 authors:
   - Sainted
+
+commands:
+  powerups:
+    description: Main plugin command.
+    aliases:
+      - pup
+      - pups
+      - powerup
+
+permissions:
+  powerups.command.main:
+    default: op
+    description: Main plugin permission.
+  powerups.*:
+    default: op
+    description: Wildcard permission.
+    children:
+      powerups.command.main: true
