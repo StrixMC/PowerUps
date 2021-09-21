@@ -2,6 +2,7 @@ package com.strixmc.powerups.hooks;
 
 import com.strixmc.powerups.PowerUps;
 import com.strixmc.powerups.powerup.PowerUp;
+import com.strixmc.powerups.services.PluginService;
 import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +20,8 @@ public class HookManager implements Initializer {
 
     private final PowerUps main;
 
-    public HookManager(PowerUps main) {
-        this.main = main;
+    public HookManager(PluginService pluginService) {
+        this.main = pluginService.getMain();
         this.initialized = false;
         start();
     }

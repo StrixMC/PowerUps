@@ -84,6 +84,11 @@ public class EnableSubCommand implements SubCommand {
     }
 
     @Override
+    public boolean requirePlayer() {
+        return false;
+    }
+
+    @Override
     public String getPermission() {
         return "powerups.command.enable";
     }

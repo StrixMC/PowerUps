@@ -1,6 +1,7 @@
 package com.strixmc.powerups.listeners;
 
 import com.strixmc.powerups.PowerUps;
+import com.strixmc.powerups.services.PluginService;
 import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +16,8 @@ public class ListenersInitializer implements Initializer {
 
     private final PowerUps main;
 
-    public ListenersInitializer(PowerUps main) {
-        this.main = main;
+    public ListenersInitializer(PluginService pluginService) {
+        this.main = pluginService.getMain();
         start();
     }
 

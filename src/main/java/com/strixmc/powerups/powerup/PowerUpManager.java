@@ -6,6 +6,7 @@ import com.gmail.filoghost.holographicdisplays.api.VisibilityManager;
 import com.gmail.filoghost.holographicdisplays.api.line.ItemLine;
 import com.strixmc.powerups.PowerUps;
 import com.strixmc.powerups.actiontags.ActionManager;
+import com.strixmc.powerups.services.PluginService;
 import com.strixmc.powerups.utils.LocationUtils;
 import com.strixmc.powerups.utils.MessageUtils;
 import com.strixmc.powerups.utils.commons.cache.Cache;
@@ -18,10 +19,10 @@ public class PowerUpManager {
     private final ActionManager actionManager;
     private Cache<Long, Hologram> hologramCache;
 
-    public PowerUpManager(PowerUps main, ActionManager actionManager) {
-        this.main = main;
-        this.actionManager = actionManager;
-        this.hologramCache = main.getPluginService().getCacheManager().getHologramCache();
+    public PowerUpManager(PluginService pluginService) {
+        this.main = pluginService.getMain();
+        this.actionManager = pluginService.getActionManager();
+        this.hologramCache = pluginService.getCacheManager().getHologramCache();
     }
 
     public void powerUpActions(Player player, PowerUp powerUp) {

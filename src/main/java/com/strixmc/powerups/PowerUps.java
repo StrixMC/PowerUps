@@ -12,7 +12,7 @@ public class PowerUps extends JavaPlugin {
     @Override
     public void onEnable() {
         this.pluginService = new PluginService(this);
-        if (!this.pluginService.isInitialized()) {
+        if (!this.pluginService.isInitialized() || this.pluginService == null) {
             getServer().getPluginManager().disablePlugin(this);
         }
     }

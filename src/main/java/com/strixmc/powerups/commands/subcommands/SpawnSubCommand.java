@@ -1,30 +1,32 @@
 package com.strixmc.powerups.commands.subcommands;
 
 import com.strixmc.powerups.powerup.PowerUp;
-import com.strixmc.powerups.powerup.PowerUpsImpl;
+import com.strixmc.powerups.powerup.PowerUpManager;
 import com.strixmc.powerups.utils.MessageUtils;
 import com.strixmc.powerups.utils.Messages;
 import com.strixmc.powerups.utils.Placeholder;
 import com.strixmc.powerups.utils.command.SubCommand;
 import com.strixmc.powerups.utils.commons.cache.Cache;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringJoiner;
+import java.util.*;
 
-public class DeleteSubCommand implements SubCommand {
+public class SpawnSubCommand implements SubCommand {
 
+    private final PowerUpManager powerUpManager;
     private final Cache<String, PowerUp> powerUpCache;
 
-    public DeleteSubCommand(Cache<String, PowerUp> powerUpCache) {
+    public SpawnSubCommand(PowerUpManager powerUpManager, Cache<String, PowerUp> powerUpCache) {
+        this.powerUpManager = powerUpManager;
         this.powerUpCache = powerUpCache;
     }
 
     @Override
     public void execute(CommandSender sender, String commandLabel, String[] args) {
         if (args.length > 0) {
+            Player player = (Player) sender;
             List<Placeholder> placeholderList = new ArrayList<>();
             placeholderList.add(new Placeholder("$command", commandLabel));
 
@@ -34,6 +36,7 @@ public class DeleteSubCommand implements SubCommand {
             String tmpID = MessageUtils.strip(name.toString().toUpperCase().trim());
             PowerUp powerUp = powerUpCache.getIfPresent(tmpID);
             if (!powerUpCache.exists(powerUp.getID())) {
+                placeholderList.add(new Placeholder("$powerup_name", name.toString()));
                 Messages.NO_EXISTS.sendMessage(sender, placeholderList);
                 return;
             }
@@ -41,8 +44,8 @@ public class DeleteSubCommand implements SubCommand {
             placeholderList.add(new Placeholder("$powerup_name", powerUp.getName()));
             placeholderList.add(new Placeholder("$powerup_id", powerUp.getID()));
 
-            powerUpCache.remove(powerUp.getID());
-            Messages.DELETED.sendMessage(sender, placeholderList);
+            Location lookingLocation = player.getTargetBlock(null, 20).getLocation();
+            powerUpManager.spawnPowerUp(powerUp, lookingLocation);
         }
     }
 
@@ -60,7 +63,7 @@ public class DeleteSubCommand implements SubCommand {
 
     @Override
     public String getName() {
-        return "delete";
+        return "spawn";
     }
 
     @Override
@@ -70,7 +73,7 @@ public class DeleteSubCommand implements SubCommand {
 
     @Override
     public String getSyntax() {
-        return Messages.DELETE_HELP.getMessage();
+        return Messages.ENABLE_HELP.getMessage();
     }
 
     @Override
@@ -79,12 +82,7 @@ public class DeleteSubCommand implements SubCommand {
     }
 
     @Override
-    public boolean requirePlayer() {
-        return false;
-    }
-
-    @Override
     public String getPermission() {
-        return "powerups.command.delete";
+        return "powerups.command.spawn";
     }
 }

@@ -19,9 +19,9 @@ public class HologramsService implements Initializer {
     private ActiveHologramsTask task;
     private final Cache<Long, Hologram> hologramCache;
 
-    public HologramsService(PowerUps main, CacheManager cacheManager) {
-        this.main = main;
-        this.hologramCache = cacheManager.getHologramCache();
+    public HologramsService(PluginService pluginService) {
+        this.main = pluginService.getMain();
+        this.hologramCache = pluginService.getCacheManager().getHologramCache();
         start();
     }
 

@@ -38,6 +38,11 @@ public class ListSubCommand implements SubCommand {
     }
 
     @Override
+    public boolean requirePlayer() {
+        return false;
+    }
+
+    @Override
     public String getName() {
         return "list";
     }

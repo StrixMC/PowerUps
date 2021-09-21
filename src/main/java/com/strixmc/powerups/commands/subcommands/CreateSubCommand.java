@@ -68,6 +68,11 @@ public class CreateSubCommand implements SubCommand {
     }
 
     @Override
+    public boolean requirePlayer() {
+        return false;
+    }
+
+    @Override
     public String getPermission() {
         return "powerups.command.create";
     }
