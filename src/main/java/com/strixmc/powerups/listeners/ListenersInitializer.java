@@ -1,14 +1,14 @@
 package com.strixmc.powerups.listeners;
 
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.PowerUps;
 import com.strixmc.powerups.services.PluginService;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginManager;
 
-public class ListenersInitializer implements Initializer {
+public class ListenersInitializer implements Service {
 
     @Getter
     @Setter

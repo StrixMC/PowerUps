@@ -1,13 +1,12 @@
 package com.strixmc.powerups.hooks;
 
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.PowerUps;
-import com.strixmc.powerups.powerup.PowerUp;
 import com.strixmc.powerups.services.PluginService;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 
-public class HookManager implements Initializer {
+public class HookManager implements Service {
 
     @Getter
     @Setter

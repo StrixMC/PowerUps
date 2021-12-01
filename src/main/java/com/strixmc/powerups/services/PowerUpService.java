@@ -1,11 +1,11 @@
 package com.strixmc.powerups.services;
 
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.PowerUps;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PowerUpService implements Initializer {
+public class PowerUpService implements Service {
 
     @Getter
     @Setter

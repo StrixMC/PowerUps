@@ -1,17 +1,17 @@
 package com.strixmc.powerups.cache;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.strixmc.acid.commons.cache.BaseCache;
+import com.strixmc.acid.commons.cache.Cache;
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.powerup.PowerUp;
-import com.strixmc.powerups.utils.commons.cache.BaseCache;
-import com.strixmc.powerups.utils.commons.cache.Cache;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
 
 @Getter
-public class CacheManager implements Initializer {
+public class CacheManager implements Service {
 
     @Getter
     @Setter

@@ -1,7 +1,7 @@
 package com.strixmc.powerups.powerup;
 
+import com.strixmc.acid.messages.MessageUtils;
 import com.strixmc.powerups.utils.ItemStackBuilder;
-import com.strixmc.powerups.utils.MessageUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

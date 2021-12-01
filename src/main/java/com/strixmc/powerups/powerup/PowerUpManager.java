@@ -4,13 +4,16 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.VisibilityManager;
 import com.gmail.filoghost.holographicdisplays.api.line.ItemLine;
+import com.strixmc.acid.commons.cache.Cache;
+import com.strixmc.acid.location.LocationUtils;
+import com.strixmc.acid.messages.MessageUtils;
 import com.strixmc.powerups.PowerUps;
 import com.strixmc.powerups.actiontags.ActionManager;
 import com.strixmc.powerups.services.PluginService;
-import com.strixmc.powerups.utils.LocationUtils;
-import com.strixmc.powerups.utils.MessageUtils;
-import com.strixmc.powerups.utils.commons.cache.Cache;
 import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
 public class PowerUpManager {
@@ -30,9 +33,22 @@ public class PowerUpManager {
         actionManager.executeActions(player, powerUp.getActions());
     }
 
+    public static Location getGroundLocation(Location location) {
+        World world = location.getWorld();
+
+        Block highest = world != null ? world.getHighestBlockAt(location).getRelative(BlockFace.UP) : null;
+        Block block = highest != null && highest.getY() < location.getY() ? highest : location.getBlock();
+
+        while (!block.getType().isSolid() && block.getLocation().getY() >= 0 && block.getLocation().getY() <= 255) {
+            block = block.getRelative(BlockFace.DOWN);
+        }
+
+        return new Location(location.getWorld(), location.getX(), block.getY() >= 0 ? block.getY() + 1 : location.getY(), location.getZ());
+    }
+
     public void spawnPowerUp(PowerUp powerUp, Location location) {
         final double i = 0.25 * powerUp.getHologram().size();
-        final double fixedY = LocationUtils.getGroundLocation(location).getY() + 0.67 + i;
+        final double fixedY = getGroundLocation(location).getY() + 0.67 + i;
         location.setY(fixedY);
         Hologram hologram = HologramsAPI.createHologram(main, location);
         VisibilityManager visibilityManager = hologram.getVisibilityManager();

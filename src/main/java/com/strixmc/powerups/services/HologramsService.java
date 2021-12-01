@@ -1,15 +1,14 @@
 package com.strixmc.powerups.services;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.strixmc.acid.commons.cache.Cache;
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.PowerUps;
-import com.strixmc.powerups.cache.CacheManager;
 import com.strixmc.powerups.tasks.ActiveHologramsTask;
-import com.strixmc.powerups.utils.commons.cache.Cache;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 
-public class HologramsService implements Initializer {
+public class HologramsService implements Service {
 
     @Getter
     @Setter

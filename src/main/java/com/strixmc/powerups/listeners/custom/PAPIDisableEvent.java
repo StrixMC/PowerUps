@@ -1,7 +1,7 @@
 package com.strixmc.powerups.listeners.custom;
 
+import com.strixmc.acid.custom_events.BaseEvent;
 import com.strixmc.powerups.hooks.PlaceholderAPIHook;
-import com.strixmc.powerups.utils.BaseEvent;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

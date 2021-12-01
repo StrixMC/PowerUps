@@ -1,8 +1,8 @@
 package com.strixmc.powerups.commands.subcommands;
 
+import com.strixmc.acid.commands.SubCommand;
+import com.strixmc.acid.messages.Placeholder;
 import com.strixmc.powerups.utils.Messages;
-import com.strixmc.powerups.utils.Placeholder;
-import com.strixmc.powerups.utils.command.SubCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

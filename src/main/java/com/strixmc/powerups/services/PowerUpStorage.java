@@ -1,9 +1,9 @@
 package com.strixmc.powerups.services;
 
+import com.strixmc.acid.commons.cache.Cache;
+import com.strixmc.acid.commons.storage.Storage;
 import com.strixmc.powerups.PowerUps;
 import com.strixmc.powerups.powerup.PowerUp;
-import com.strixmc.powerups.utils.commons.cache.Cache;
-import com.strixmc.powerups.utils.commons.storage.Storage;
 
 import java.util.Optional;
 
@@ -28,7 +28,7 @@ public class PowerUpStorage implements Storage<PowerUp> {
     }
 
     @Override
-    public boolean exist(String id) {
+    public boolean exists(String unique) {
         return false;
     }
 

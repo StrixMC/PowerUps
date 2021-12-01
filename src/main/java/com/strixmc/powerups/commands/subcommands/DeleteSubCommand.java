@@ -1,12 +1,11 @@
 package com.strixmc.powerups.commands.subcommands;
 
+import com.strixmc.acid.commands.SubCommand;
+import com.strixmc.acid.commons.cache.Cache;
+import com.strixmc.acid.messages.MessageUtils;
+import com.strixmc.acid.messages.Placeholder;
 import com.strixmc.powerups.powerup.PowerUp;
-import com.strixmc.powerups.powerup.PowerUpsImpl;
-import com.strixmc.powerups.utils.MessageUtils;
 import com.strixmc.powerups.utils.Messages;
-import com.strixmc.powerups.utils.Placeholder;
-import com.strixmc.powerups.utils.command.SubCommand;
-import com.strixmc.powerups.utils.commons.cache.Cache;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;

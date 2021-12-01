@@ -1,5 +1,9 @@
 package com.strixmc.powerups.utils;
 
+import com.strixmc.acid.files.FileCreator;
+import com.strixmc.acid.messages.MessageUtils;
+import com.strixmc.acid.messages.Placeholder;
+import com.strixmc.acid.messages.StringUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -41,7 +45,6 @@ public enum Messages {
     private String defaultMessage;
     @Getter
     private List<String> defaultListMessage;
-    @Getter
     @Setter
     public static FileCreator lang;
 
@@ -121,7 +124,7 @@ public enum Messages {
 
     public void sendMessage(CommandSender sender, List<Placeholder> placeholders) {
         if (isSilent()) return;
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             sendMessage((Player) sender, placeholders);
             return;
         }

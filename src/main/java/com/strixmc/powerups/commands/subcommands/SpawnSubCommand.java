@@ -1,17 +1,20 @@
 package com.strixmc.powerups.commands.subcommands;
 
+import com.strixmc.acid.commands.SubCommand;
+import com.strixmc.acid.commons.cache.Cache;
+import com.strixmc.acid.messages.MessageUtils;
+import com.strixmc.acid.messages.Placeholder;
 import com.strixmc.powerups.powerup.PowerUp;
 import com.strixmc.powerups.powerup.PowerUpManager;
-import com.strixmc.powerups.utils.MessageUtils;
 import com.strixmc.powerups.utils.Messages;
-import com.strixmc.powerups.utils.Placeholder;
-import com.strixmc.powerups.utils.command.SubCommand;
-import com.strixmc.powerups.utils.commons.cache.Cache;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringJoiner;
 
 public class SpawnSubCommand implements SubCommand {
 

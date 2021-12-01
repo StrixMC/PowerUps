@@ -1,5 +1,6 @@
 package com.strixmc.powerups.services;
 
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.PowerUps;
 import com.strixmc.powerups.actiontags.ActionManager;
 import com.strixmc.powerups.cache.CacheManager;
@@ -7,22 +8,15 @@ import com.strixmc.powerups.commands.PowerUpCommandExecutor;
 import com.strixmc.powerups.hooks.HookManager;
 import com.strixmc.powerups.listeners.ListenersInitializer;
 import com.strixmc.powerups.powerup.PowerUpManager;
-import com.strixmc.powerups.utils.FileCreator;
-import com.strixmc.powerups.utils.Messages;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PluginService implements Initializer {
+public class PluginService implements Service {
 
     @Getter
     @Setter
     private boolean initialized;
 
-    @Getter
-    private FileCreator lang;
-    @Getter
-    private FileCreator config;
     @Getter
     private HookManager hookManager;
     @Getter
@@ -46,9 +40,6 @@ public class PluginService implements Initializer {
     @Override
     public void start() {
         setInitialized(true);
-        this.lang = new FileCreator(this.main, "lang");
-        this.config = new FileCreator(this.main, "config");
-        Messages.setLang(this.lang);
 
         this.hookManager = new HookManager(this);
         if (!this.hookManager.getHoloHook().isInitialized()) {

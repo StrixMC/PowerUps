@@ -1,11 +1,11 @@
 package com.strixmc.powerups.hooks;
 
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.PowerUps;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PlaceholderAPIHook implements Initializer {
+public class PlaceholderAPIHook implements Service {
 
     @Getter
     @Setter

@@ -1,13 +1,13 @@
 package com.strixmc.powerups.hooks;
 
+import com.strixmc.acid.commons.service.Service;
 import com.strixmc.powerups.PowerUps;
-import com.strixmc.powerups.utils.commons.service.Initializer;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.logging.Level;
 
-public class HolographicDisplaysHook implements Initializer {
+public class HolographicDisplaysHook implements Service {
 
     @Getter
     @Setter
@@ -24,7 +24,8 @@ public class HolographicDisplaysHook implements Initializer {
     public void start() {
         if (!main.getServer().getPluginManager().isPluginEnabled("HolographicDisplays")) {
             main.getLogger().warning("HolographicDisplays has been NOT found!");
-            main.getLogger().log(Level.SEVERE, "PowerUps will cannot work without HolographicDisplays!");
+            main.getLogger().log(Level.SEVERE, "PowerUps will NOT work without HolographicDisplays!");
+            main.getLogger().log(Level.SEVERE, "https://dev.bukkit.org/projects/holographic-displays");
             return;
         }
 
