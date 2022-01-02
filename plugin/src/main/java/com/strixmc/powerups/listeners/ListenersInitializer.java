@@ -1,0 +1,43 @@
+package com.strixmc.powerups.listeners;
+
+import com.strixmc.acid.commons.service.Service;
+import com.strixmc.powerups.PowerUps;
+import com.strixmc.powerups.services.PluginService;
+import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.PluginManager;
+
+public class ListenersInitializer implements Service {
+
+    private boolean initialized;
+
+    private final PowerUps main;
+
+    public ListenersInitializer(PluginService pluginService) {
+        this.main = pluginService.getMain();
+        start();
+    }
+
+    @Override
+    public void start() {
+        setInitialized(true);
+
+        PluginManager pluginManager = main.getServer().getPluginManager();
+        pluginManager.registerEvents(new PowerUpsListener(), main);
+    }
+
+    @Override
+    public void finish() {
+        if (!isInitialized()) return;
+        HandlerList.unregisterAll(main);
+    }
+
+    @Override
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    @Override
+    public void setInitialized(boolean initialized) {
+        this.initialized = initialized;
+    }
+}
