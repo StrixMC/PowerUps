@@ -3,7 +3,7 @@
 # {'"'}  Language file configuration.
 # -"-"-  Developed by StrixMC
 
-DENIED_WORLD:
+DENIED_WORLDS:
   - thisworld
   - andthis_world
 
