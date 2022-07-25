@@ -7,10 +7,11 @@ subprojects {
         mavenCentral()
         mavenLocal()
 
-        maven(url = "https://jitpack.io")
-        maven(url = "https://repo.codemc.io/repository/maven-public/")
-        maven(url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-        maven(url = "https://repo.extendedclip.com/content/repositories/placeholderapi/")
+        maven("https://jitpack.io")
+        maven("https://repo.codemc.io/repository/maven-public/")
+        maven("https://repo.unnamed.team/repository/unnamed-public/")
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+        maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     }
 }
 
