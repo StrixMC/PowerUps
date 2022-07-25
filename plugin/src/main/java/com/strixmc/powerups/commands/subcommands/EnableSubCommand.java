@@ -27,13 +27,13 @@ public class EnableSubCommand implements SubCommand {
             List<Placeholder> placeholderList = new ArrayList<>();
             placeholderList.add(new Placeholder("$command", commandLabel));
 
-            StringJoiner name = new StringJoiner("_");
-            Arrays.stream(args).forEach(name::add);
+            String name = args[0];
+            String tmpID = MessageUtils.strip(name.toUpperCase().trim());
 
-            String tmpID = MessageUtils.strip(name.toString().toUpperCase().trim());
             PowerUp powerUp = registry.getPowerUp(tmpID);
             if (powerUp == null) {
-                placeholderList.add(new Placeholder("$powerup_name", name.toString()));
+                placeholderList.add(new Placeholder("$powerup_name", name));
+                placeholderList.add(new Placeholder("$powerup_id", tmpID));
                 Messages.NO_EXISTS.sendMessage(sender, placeholderList);
                 return;
             }
