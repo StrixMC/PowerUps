@@ -11,8 +11,8 @@ public class PlaceholderAPIHook implements Service {
 
     private final PowerUps main;
 
-    public PlaceholderAPIHook(PowerUps main) {
-        this.main = main;
+    public PlaceholderAPIHook(HookManager manager) {
+        this.main = manager.getMain();
         this.initialized = false;
         start();
     }

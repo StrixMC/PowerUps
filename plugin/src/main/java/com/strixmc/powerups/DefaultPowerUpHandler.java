@@ -4,10 +4,11 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.gmail.filoghost.holographicdisplays.api.VisibilityManager;
 import com.gmail.filoghost.holographicdisplays.api.line.ItemLine;
+import com.strixmc.acid.location.LocationUtils;
 import com.strixmc.acid.messages.MessageUtils;
 import com.strixmc.powerups.actiontags.ActionManager;
+import com.strixmc.powerups.hologram.HologramHandler;
 import com.strixmc.powerups.powerup.PowerUp;
-import com.strixmc.powerups.powerup.PowerUpRegistry;
 import com.strixmc.powerups.services.PluginService;
 import com.strixmc.powerups.utils.ItemStackBuilder;
 import org.bukkit.Bukkit;
@@ -25,10 +26,12 @@ public class DefaultPowerUpHandler implements PowerUpHandler {
 
     private final PowerUps main;
     private final ActionManager actionManager;
+    private final HologramHandler hologramHandler;
 
     public DefaultPowerUpHandler(PluginService pluginService) {
         this.main = pluginService.getMain();
         this.actionManager = pluginService.getActionManager();
+        this.hologramHandler = pluginService.getHookManager().getHoloHook().getHandler();
     }
 
     @Override
@@ -45,29 +48,8 @@ public class DefaultPowerUpHandler implements PowerUpHandler {
     @Override
     public void spawnPowerUp(PowerUp powerUp, Location location) {
         final double i = 0.25 * powerUp.getHologram().size();
-        final double fixedY = getGroundLocation(location).getY() + 0.67 + i;
-        location.setY(fixedY);
-        Hologram hologram = HologramsAPI.createHologram(main, location);
-        VisibilityManager visibilityManager = hologram.getVisibilityManager();
-        visibilityManager.setVisibleByDefault(false);
-        powerUp.getHologram().forEach(text -> hologram.appendTextLine(MessageUtils.translate(text)));
-        ItemLine itemLine = hologram.appendItemLine(getItem(powerUp));
-        visibilityManager.setVisibleByDefault(true);
-        long savedHologramLong = System.currentTimeMillis();
-        //todo fix-me
-        //hologramCache.add(savedHologramLong, hologram);
-
-        //todo add types.
-
-        itemLine.setTouchHandler(player -> {
-            executeActions(player, powerUp);
-            hologram.delete();
-        });
-
-        itemLine.setPickupHandler(player -> {
-            executeActions(player, powerUp);
-            hologram.delete();
-        });
+        location.setY(getGroundLocation(location).getY() + 0.67 + i);
+        hologramHandler.createHologram(this, powerUp, location);
     }
 
     public static Location getGroundLocation(Location location) {
@@ -81,16 +63,5 @@ public class DefaultPowerUpHandler implements PowerUpHandler {
         }
 
         return new Location(location.getWorld(), location.getX(), block.getY() >= 0 ? block.getY() + 1 : location.getY(), location.getZ());
-    }
-
-    public ItemStack getItem(PowerUp powerUp) {
-        try {
-            return new ItemStackBuilder(Material.matchMaterial(powerUp.getMaterial())).data(powerUp.getData());
-        } catch (NullPointerException e) {
-            for (int i = 0; i < 3; i++) {
-                Bukkit.getLogger().warning(powerUp.getName() + " powerup have a wrong named material (\"" + powerUp.getID() + "\")");
-            }
-            return new ItemStack(Material.COAL_BLOCK);
-        }
     }
 }

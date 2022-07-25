@@ -8,12 +8,14 @@ public class HookManager implements Service {
 
     private boolean initialized;
 
+    private HologramHook holoHook;
     private PlaceholderAPIHook papiHook;
-    private HolographicDisplaysHook holoHook;
 
     private final PowerUps main;
+    private final PluginService pluginService;
 
     public HookManager(PluginService pluginService) {
+        this.pluginService = pluginService;
         this.main = pluginService.getMain();
         this.initialized = false;
         start();
@@ -21,10 +23,10 @@ public class HookManager implements Service {
 
     @Override
     public void start() {
-        setInitialized(true);
+        this.holoHook = new HologramHook(this);
+        this.papiHook = new PlaceholderAPIHook(this);
 
-        this.papiHook = new PlaceholderAPIHook(main);
-        this.holoHook = new HolographicDisplaysHook(main);
+        setInitialized(true);
     }
 
     @Override
@@ -35,11 +37,15 @@ public class HookManager implements Service {
         this.holoHook.finish();
     }
 
+    public PluginService getPluginService() {
+        return pluginService;
+    }
+
     public PlaceholderAPIHook getPapiHook() {
         return papiHook;
     }
 
-    public HolographicDisplaysHook getHoloHook() {
+    public HologramHook getHoloHook() {
         return holoHook;
     }
 

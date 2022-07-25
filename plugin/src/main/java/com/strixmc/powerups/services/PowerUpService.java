@@ -3,7 +3,6 @@ package com.strixmc.powerups.services;
 import com.strixmc.acid.commons.service.Service;
 import com.strixmc.acid.files.FileCreator;
 import com.strixmc.powerups.PowerUps;
-import com.strixmc.powerups.powerup.DefaultPowerUpRegistry;
 import com.strixmc.powerups.powerup.PowerUp;
 import com.strixmc.powerups.powerup.PowerUpRegistry;
 
@@ -34,7 +33,7 @@ public class PowerUpService implements Service {
         if (files == null || files.length == 0) return;
 
         for (File file : files) {
-            String ID = file.getName().substring(0, file.getName().length() - 4);
+            String ID = file.getName().split("\\.")[0];
 
             FileCreator storageFile = new FileCreator(main, ID, storageFolder);
 

@@ -33,13 +33,7 @@ public class PluginService implements Service {
 
     @Override
     public void start() {
-        setInitialized(true);
-
         this.hookManager = new HookManager(this);
-        if (!this.hookManager.getHoloHook().isInitialized()) {
-            setInitialized(false);
-            return;
-        }
 
         this.powerUpRegistry = new DefaultPowerUpRegistry();
         this.actionManager = new ActionManager(this);
@@ -49,6 +43,8 @@ public class PluginService implements Service {
         this.listenersInitializer = new ListenersInitializer(this);
 
         new PowerUpCommandExecutor(this).registerMainCommand(this.main, "powerups");
+
+        setInitialized(true);
     }
 
     @Override
