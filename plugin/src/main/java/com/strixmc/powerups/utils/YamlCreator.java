@@ -2,7 +2,6 @@ package com.strixmc.powerups.utils;
 
 import org.bukkit.plugin.Plugin;
 import org.simpleyaml.configuration.file.YamlFile;
-import org.simpleyaml.exceptions.InvalidConfigurationException;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class YamlCreator extends YamlFile {
     public YamlCreator(Plugin plugin, String fileName, File folder) {
         this.plugin = plugin;
         this.fileName = fileName + (fileName.endsWith(".yml") ? "" : ".yml");
-        if (folder.exists()) folder.mkdir();
+        if (!folder.exists()) folder.mkdir();
         this.file = new File(folder, this.fileName);
         setConfigurationFile(file);
     }
@@ -58,18 +57,13 @@ public class YamlCreator extends YamlFile {
     }
 
     private void loadFile(boolean withComments) {
-        if (withComments) {
-            try {
-                this.loadWithComments();
-            } catch (IOException | InvalidConfigurationException e) {
-                e.printStackTrace();
-            }
-            return;
-        }
-
         try {
-            this.load();
-        } catch (InvalidConfigurationException | IOException e) {
+            if (withComments) {
+                this.loadWithComments();
+            } else {
+                this.load();
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
